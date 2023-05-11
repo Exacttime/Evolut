@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5416386497161865184}
   - component: {fileID: 8968993882605361637}
+  - component: {fileID: 1273940125}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -45,12 +46,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3e670c6f7a26fb49bebe7409b5bb200, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 5684424251387836969}
-  playerTransform: {fileID: 9147722635272623183}
-  moveSpeed: 10
+  player: {fileID: 2479412089319265460}
+  playerTransform: {fileID: 5416386497161865184}
+  moveSpeed: 2
   jumpForce: 5
   healthLife: 100
-  velocity: {x: 0, y: 0, z: 0}
+  characterController: {fileID: 1273940125}
+--- !u!143 &1273940125
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2479412089319265460}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5684424251387836969
 GameObject:
   m_ObjectHideFlags: 0
