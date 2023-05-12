@@ -1,68 +1,61 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class PlayerController : MonoBehaviour
+public partial class PlayerController : MonoBehaviour
 {
+    [Header("Componentes")]
     [SerializeField] public GameObject player;
     [SerializeField] public Transform playerTransform;
-
-    public float moveSpeed = 1f;
+    [SerializeField] public Rigidbody rigidBody;
+    [Space]
+    [Header("Valores")]
     [SerializeField] private float jumpForce = 0f;
     [SerializeField] private float healthLife = 0f;
-    private bool isMoving = false;
+    [SerializeField] public float ray = 0.7f; // ray do Raycast
 
-    private Rigidbody rigidBody;
-
+    public LayerMask floorLayer;
     public CharacterController characterController;
+
+    public float moveSpeed = 1f;
+
+    private bool isGrounded;
+    private bool isOnFloor = false;
+    private bool isMoving = false;
 
     public void Start()
     {
-    rigidBody = GetComponent<Rigidbody>();
-    transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, 0f , transform.localEulerAngles.z);
+        transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, 0f, transform.localEulerAngles.z);
     }
     void Update()
     {
-
         isMoving = false;
 
         if (Input.GetAxisRaw("Horizontal") > 0.5f || Input.GetAxisRaw("Horizontal") < -0.5f)
         {
-            GetComponent<Rigidbody>().velocity += transform.right * Input.GetAxisRaw("Horizontal") * moveSpeed;
+            rigidBody.velocity += transform.right * Input.GetAxisRaw("Horizontal") * moveSpeed;
         }
         if (Input.GetAxisRaw("Vertical") > 0.5f || Input.GetAxisRaw("Vertical") < -0.5f)
-        {
-            //transform.Translate(Vector3.forward * Input.GetAxis("Vertical") * playerSpeed);
-            GetComponent<Rigidbody>().velocity += transform.forward * Input.GetAxisRaw("Vertical") * moveSpeed;
+        { 
+            rigidBody.velocity += transform.forward * Input.GetAxisRaw("Vertical") * moveSpeed;
             isMoving = true;
         }
-        /*
-        if (Input.GetKeyDown(KeyCode.A))
+        if (IsGrounded() == true && Input.GetButtonDown("Jump"))
         {
-            Debug.Log("A");
-            // characterController.SimpleMove(novaPosition * moveSpeed * Time.deltaTime);
-           playerTransform.position = new Vector3(playerTransform.position.x + moveSpeed * Time.deltaTime, 0f, playerTransform.position.z);
+            rigidBody.AddForce(new Vector3(0, 20, 0), ForceMode.Impulse);
         }
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            Debug.Log("A");
-            // characterController.SimpleMove(novaPosition * moveSpeed * Time.deltaTime);
-            playerTransform.position = new Vector3(playerTransform.position.x - moveSpeed * Time.deltaTime, 0f, playerTransform.position.z);
-        }
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            Debug.Log("A");
-            // characterController.SimpleMove(novaPosition * moveSpeed * Time.deltaTime);
-            playerTransform.position = new Vector3(playerTransform.position.x,0f, playerTransform.position.z + moveSpeed * Time.deltaTime);
-        }
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            Debug.Log("A");
-            // characterController.SimpleMove(novaPosition * moveSpeed * Time.deltaTime);
-            playerTransform.position = new Vector3(playerTransform.position.x, 0f, playerTransform.position.z - moveSpeed * Time.deltaTime);
-            
-        }
-        */
-
     }
+    private bool IsGrounded()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, ray, floorLayer))
+        {
+
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
 }
