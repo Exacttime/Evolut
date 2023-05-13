@@ -25,6 +25,7 @@ public class EnemyIA : MonoBehaviour
 
             if (distanceToPlayer <= rangeToChasePlayer)
             {
+                //transform.position = Vector3.MoveTowards(transform.position, player.transform.position, moveSpeed).;
                 direction = (player.transform.position - transform.position).normalized;
                 chasingPlayer = true;
             }
@@ -34,10 +35,11 @@ public class EnemyIA : MonoBehaviour
                 {
                     direction = RandomDirection();
                     chasingPlayer = false;
+                    Debug.Log("Parou de seguir:");
                 }
             }
 
-            enemyRigidbody.MovePosition(transform.localPosition + direction * moveSpeed * Time.deltaTime);
+            enemyRigidbody.MovePosition(transform.position + direction * moveSpeed * Time.deltaTime);
         }
     }
 
