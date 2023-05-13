@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   rangeToChasePlayer: 10
-  enemyRigidbody: {fileID: 1200434982}
+  enemyRigidbody: {fileID: 0}
   direction: {x: 0, y: 0, z: 0}
   player: {fileID: 0}
 --- !u!54 &1200434982
