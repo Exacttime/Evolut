@@ -29,7 +29,7 @@ public partial class PlayerController : MonoBehaviour
     void Update()
     {
         isMoving = false;
-
+        #region Movimentação
         if (Input.GetAxisRaw("Horizontal") > 0.5f || Input.GetAxisRaw("Horizontal") < -0.5f)
         {
             rigidBody.velocity += transform.right * Input.GetAxisRaw("Horizontal") * moveSpeed;
@@ -43,6 +43,7 @@ public partial class PlayerController : MonoBehaviour
         {
             rigidBody.AddForce(new Vector3(0, 20, 0), ForceMode.Impulse);
         }
+        #endregion
     }
     private bool IsGrounded()
     {
