@@ -46,9 +46,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eddf35ec2685d040a13ba60c77b35f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  moveSpeed: 10
   rangeToChasePlayer: 10
-  enemyRigidbody: {fileID: 0}
+  enemyRigidbody: {fileID: 1200434982}
   direction: {x: 0, y: 0, z: 0}
   player: {fileID: 0}
 --- !u!54 &1200434982

@@ -73,6 +73,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackAnimation: {fileID: 7942559523806574828}
+  attacking: 0
 --- !u!95 &7942559523806574828
 Animator:
   serializedVersion: 5
@@ -83,7 +84,7 @@ Animator:
   m_GameObject: {fileID: 2479412089319265460}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8eaee6e767b25a64c8d261202e6fc4cd, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 2
   m_ApplyRootMotion: 0
