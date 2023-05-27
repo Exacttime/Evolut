@@ -6,11 +6,14 @@ using UnityEngine;
 public class CameraRelativeMovement : MonoBehaviour
 {
     [SerializeField] private CharacterController characterController;
+    [Header("Vetores")]
     Vector3 playerInput;
     Vector3 cameraRelativeMovement;
+    [Header("Floats")]
     float horizontalInput;
     float verticalInput;
     float rotationFactorPerFrame = 15.0f;
+    [Space]
     bool isMovementPressed;
 
     private void Start()
@@ -22,6 +25,7 @@ public class CameraRelativeMovement : MonoBehaviour
         HandleRotation();
         Movement();
     }
+    #region Input e Valores
     private void Movement()
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
@@ -32,6 +36,8 @@ public class CameraRelativeMovement : MonoBehaviour
         cameraRelativeMovement = ConvertToCameraSpace(playerInput);
         characterController.Move(cameraRelativeMovement * Time.deltaTime);
     }
+    #endregion
+    #region Mecanismos para rotação e movimentação
     Vector3 ConvertToCameraSpace(Vector3 vectorRotate)
     {
         float currentYValue = vectorRotate.y;
@@ -65,4 +71,5 @@ public class CameraRelativeMovement : MonoBehaviour
             transform.rotation = Quaternion.Slerp(currentRotation, targetRotation, rotationFactorPerFrame * Time.deltaTime);
         }
     }
+    #endregion
 }
