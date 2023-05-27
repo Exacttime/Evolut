@@ -7,20 +7,28 @@ public class CameraRelativeMovement : MonoBehaviour
 {
     [SerializeField] private CharacterController characterController;
     Vector3 playerInput;
-    float horizontalInput;
     Vector3 cameraRelativeMovement;
+    float horizontalInput;
     float verticalInput;
+    float rotationFactorPerFrame = 15.0f;
+    bool isMovementPressed;
+
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
     }
     void Update()
     {
+        HandleRotation();
+        Movement();
+    }
+    private void Movement()
+    {
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
 
-        playerInput.x = horizontalInput;
-        playerInput.z = verticalInput;
+        playerInput.x = horizontalInput * 2;
+        playerInput.z = verticalInput * 2;
         cameraRelativeMovement = ConvertToCameraSpace(playerInput);
         characterController.Move(cameraRelativeMovement * Time.deltaTime);
     }
@@ -49,5 +57,12 @@ public class CameraRelativeMovement : MonoBehaviour
         positionToLookAt.x = cameraRelativeMovement.x;
         positionToLookAt.y = 0;
         positionToLookAt.z = cameraRelativeMovement.z;
+
+        Quaternion currentRotation = transform.rotation;
+        if (isMovementPressed)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(positionToLookAt);
+            transform.rotation = Quaternion.Slerp(currentRotation, targetRotation, rotationFactorPerFrame * Time.deltaTime);
+        }
     }
 }
